@@ -19,3 +19,7 @@ class Provider(models.Model):
     prov_department = models.CharField(max_length=200, choices=DEPT_CHOICES, default=PEDIATRICS)
     prov_email = models.EmailField()
     prov_hospital = models.CharField(max_length=200)
+
+    def __str__(self):
+        full_name = self.prov_lname + ', ' + self.prov_fname + ' ' + self.prov_midinital
+        return  full_name
