@@ -20,8 +20,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # this will need to change depending on the server
-with open('/home/cullen/keys/resource_key.txt') as f:
-    SECRET_KEY = f.read().strip()
+with open('/home/cullen/keys/resource_secret_key.txt') as sec_key_str:
+    SECRET_KEY = sec_key_str.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -74,10 +74,21 @@ WSGI_APPLICATION = 'resource_tracker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+with open('/home/cullen/keys/resourcedb_key.txt') as db_key_str:
+    RESOURCE_DB_KEY = db_key_str.read().strip()
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'resourcedb',
+        'USER': 'cullen',
+        'PASSWORD': RESOURCE_DB_KEY,
+        'HOST': 'resource-instance.cmuqilfgsw11.us-east-1.rds.amazonaws.com',
+        'PORT': '5432',
+        'client_encoding': 'UTF8',
+        'default_transaction_isolation': 'read committed' 
+        # 'CONN_MAX_AGE': 60 # keeps persistent connection open in seconds. None is unlimited
+
     }
 }
 
@@ -106,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Chicago'
 
 USE_I18N = True
 

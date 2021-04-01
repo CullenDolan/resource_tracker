@@ -1,3 +1,5 @@
 venv/
 __pycache__/
 db.sqlite3
+resource_app/__pycache__/
+resource_tracker/__pycache__/
