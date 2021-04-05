@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'resource_app.apps.ResourceAppConfig',
+    'resource_app.apps.ResourceAppConfig', # this is basically spelling out the path to apps.py in an app
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
