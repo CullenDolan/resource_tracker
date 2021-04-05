@@ -1,0 +1,9 @@
+{% if all_providers %}
+    <ul>
+    {% for provs in all_providers %}
+        <li><a href="/resources/{{ provs.epic_id }}/">{{ provs.prov_lname }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No providers are available.</p>
+{% endif %}
