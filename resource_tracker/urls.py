@@ -18,7 +18,6 @@ from django.urls import path, include
 from resource_app import views as resource_views
 
 urlpatterns = [
-    path('', include('resource_app.urls')),
-    path('provider/', resource_views.add_provider, name='add_provider'),
+    path('resources/', include('resource_app.urls')),
     path('admin/', admin.site.urls),
 ]

@@ -7,4 +7,5 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('<int:epic_id>/', views.provider_detail, name='provider_detail'),
 ]
