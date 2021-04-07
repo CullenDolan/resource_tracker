@@ -19,7 +19,7 @@ class Provider(models.Model):
     prov_department = models.CharField(max_length=200, choices=DEPT_CHOICES, default=PEDIATRICS)
     prov_email = models.EmailField()
     prov_hospital = models.CharField(max_length=200)
-
+    # this is the primary key that building choice is looking at
     def __str__(self):
         full_name = self.prov_lname + ', ' + self.prov_fname + ' ' + self.prov_midinital
         return  full_name
@@ -38,3 +38,8 @@ class BuildingChoice(models.Model):
     provider = models.ForeignKey(Provider, on_delete = models.CASCADE)
     building_choice = models.CharField(max_length=200, choices=BUILDING_CHOICES, default=MAIN_CAMPUS)
     votes = models.IntegerField(default=0)
+    
+    # return the building choice instead of the 
+    def __str__(self):
+        return self.building_choice
+

@@ -2,7 +2,7 @@
 {% if all_providers %}
     <ul>
     {% for provider in all_providers %}
-        <li><a href="/resources/{{ provider.epic_id }}/">{{ provider.prov_lname }}</a></li>
+        <li><a href="{% url 'resource_app:provider_detail' provider.epic_id %}">{{ provider.prov_lname }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
