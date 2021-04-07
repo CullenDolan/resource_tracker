@@ -23,3 +23,18 @@ class Provider(models.Model):
     def __str__(self):
         full_name = self.prov_lname + ', ' + self.prov_fname + ' ' + self.prov_midinital
         return  full_name
+
+class BuildingChoice(models.Model):
+    MAIN_CAMPUS = 'MAIN CAMPUS'
+    SATELLITE_1 = 'SATELLITE 1'
+    SATELLITE_2 = 'SATELLITE 2'
+    SATELLITE_3 = 'SATELLITE 3'
+    BUILDING_CHOICES = [
+        (MAIN_CAMPUS,'MAIN CAMPUS'),
+        (SATELLITE_1,'SATELLITE 1'),
+        (SATELLITE_2,'SATELLITE 2'),
+        (SATELLITE_3,'SATELLITE 3'),
+    ]
+    provider = models.ForeignKey(Provider, on_delete = models.CASCADE)
+    building_choice = models.CharField(max_length=200, choices=BUILDING_CHOICES, default=MAIN_CAMPUS)
+    votes = models.IntegerField(default=0)

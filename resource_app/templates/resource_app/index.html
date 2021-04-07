@@ -1,7 +1,8 @@
+<h1>Providers</h1>
 {% if all_providers %}
     <ul>
-    {% for provs in all_providers %}
-        <li><a href="/resources/{{ provs.epic_id }}/">{{ provs.prov_lname }}</a></li>
+    {% for provider in all_providers %}
+        <li><a href="/resources/{{ provider.epic_id }}/">{{ provider.prov_lname }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
