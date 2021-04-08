@@ -21,10 +21,11 @@ class Provider(models.Model):
     prov_hospital = models.CharField(max_length=200)
     # this is the primary key that building choice is looking at
     def __str__(self):
-        full_name = self.prov_lname + ', ' + self.prov_fname + ' ' + self.prov_midinital
+        full_name = str(self.epic_id) + ' - ' + self.prov_lname
+        #full_name = self.prov_lname + ', ' + self.prov_fname + ' ' + self.prov_midinital
         return  full_name
 
-class BuildingChoice(models.Model):
+class Building(models.Model):
     MAIN_CAMPUS = 'MAIN CAMPUS'
     SATELLITE_1 = 'SATELLITE 1'
     SATELLITE_2 = 'SATELLITE 2'
@@ -35,11 +36,27 @@ class BuildingChoice(models.Model):
         (SATELLITE_2,'SATELLITE 2'),
         (SATELLITE_3,'SATELLITE 3'),
     ]
-    provider = models.ForeignKey(Provider, on_delete = models.CASCADE)
-    building_choice = models.CharField(max_length=200, choices=BUILDING_CHOICES, default=MAIN_CAMPUS)
-    votes = models.IntegerField(default=0)
+
+    FLOOR_1 = 'FLOOR 1'
+    FLOOR_2 = 'FLOOR 2'
+    FLOOR_3 = 'FLOOR 3'
+    FLOOR_CHOICES = [
+        (FLOOR_1, 'FLOOR 1'),
+        (FLOOR_2, 'FLOOR 2'),
+        (FLOOR_3, 'FLOOR 3'),
+    ]
     
+    ROOM_1 = 'ROOM 1'
+    ROOM_2 = 'ROOM 2'
+    ROOM_3 = 'ROOM 3'
+    ROOM_CHOICES = [
+        (ROOM_1, 'ROOM 1'),
+        (ROOM_2, 'ROOM 2'),
+        (ROOM_3, 'ROOM 3'),
+    ]
+    building = models.CharField(max_length=50, choices=BUILDING_CHOICES, default=MAIN_CAMPUS)
+    floor = models.CharField(max_length=50, choices=FLOOR_CHOICES, default=FLOOR_1)
+    room = models.CharField(max_length=50, choices=ROOM_CHOICES, default=ROOM_1)
     # return the building choice instead of the 
     def __str__(self):
-        return self.building_choice
-
+        return self.building + '-' + self.floor + '-' + self.room
