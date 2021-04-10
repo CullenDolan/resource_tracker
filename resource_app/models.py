@@ -19,6 +19,9 @@ class Provider(models.Model):
     prov_department = models.CharField(max_length=200, choices=DEPT_CHOICES, default=PEDIATRICS)
     prov_email = models.EmailField()
     prov_hospital = models.CharField(max_length=200)
+    modified_date = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+  
     # this is the primary key that building choice is looking at
     def __str__(self):
         full_name = str(self.epic_id) + ' - ' + self.prov_lname
@@ -57,6 +60,14 @@ class Building(models.Model):
     building = models.CharField(max_length=50, choices=BUILDING_CHOICES, default=MAIN_CAMPUS)
     floor = models.CharField(max_length=50, choices=FLOOR_CHOICES, default=FLOOR_1)
     room = models.CharField(max_length=50, choices=ROOM_CHOICES, default=ROOM_1)
+    modified_date = models.DateTimeField(auto_now=True)
+    created_date = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     # return the building choice instead of the 
     def __str__(self):
         return self.building + '-' + self.floor + '-' + self.room
+
+class Schedule(models.Model):
+    datetime = models.DateTimeField()
+    duration = models.DurationField()
+    provider = models.ForeignKey(Provider, on_delete=models.CASCADE)
+    location = models.ForeignKey(Building, on_delete=models.CASCADE)
