@@ -28,7 +28,7 @@ class Provider(models.Model):
         #full_name = self.prov_lname + ', ' + self.prov_fname + ' ' + self.prov_midinital
         return  full_name
 
-class Building(models.Model):
+class Location(models.Model):
     MAIN_CAMPUS = 'MAIN CAMPUS'
     SATELLITE_1 = 'SATELLITE 1'
     SATELLITE_2 = 'SATELLITE 2'
@@ -70,4 +70,4 @@ class Schedule(models.Model):
     datetime = models.DateTimeField()
     duration = models.DurationField()
     provider = models.ForeignKey(Provider, on_delete=models.CASCADE)
-    location = models.ForeignKey(Building, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
