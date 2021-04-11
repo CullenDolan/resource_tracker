@@ -18,5 +18,5 @@ def location_detail(request, id):
     location = get_object_or_404(Location, pk=id)
     return render(request, 'resource_app/location_detail.html', {'location':location})
 
-# def add_schedule(request, epic_id):
-#     new_schedule_slot = get_object_or_404(Schedule, )
+def add_provider(request):
+    return render(request, 'resource_app/add_provider.html')
