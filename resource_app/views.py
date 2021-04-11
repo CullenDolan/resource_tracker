@@ -4,11 +4,14 @@ from django.urls import reverse
 
 def index(request):
     all_providers = Provider.objects.order_by('prov_lname')
-    context =  {'all_providers': all_providers}
+    all_locations = Location.objects.order_by('building')
+    context =  {
+                'all_providers': all_providers,
+                'all_locations': all_locations,}
     return render(request, 'resource_app/index.html', context)
 
 def provider_detail(request, epic_id):
-    provider = get_object_or_404(Schedule, pk=epic_id)
+    provider = get_object_or_404(Provider, pk=epic_id)
     return render(request, 'resource_app/provider_detail.html', {'provider':provider})
 
 def location_detail(request, id):
