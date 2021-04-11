@@ -1,5 +1,4 @@
 from django.db import models
-from django.forms import ModelForm
 
 class Provider(models.Model):
     # create the choices for the dept
@@ -29,11 +28,6 @@ class Provider(models.Model):
         #full_name = self.prov_lname + ', ' + self.prov_fname + ' ' + self.prov_midinital
         return  full_name
 
-class ProviderForm(ModelForm):
-    class Meta:
-        model = Provider
-        fields = ['epic_id','prov_fname','prov_midinital','prov_lname','prov_division',
-                'prov_department', 'prov_department','prov_email', 'prov_hospital']
 
 class Location(models.Model):
     MAIN_CAMPUS = 'MAIN CAMPUS'
