@@ -1,22 +1,29 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+from django.views import generic
+
 from .models import Provider, Location, Schedule
 from .forms import ProviderForm
-from django.urls import reverse
 
-def index(request):
-    all_providers = Provider.objects.order_by('prov_lname')
-    all_locations = Location.objects.order_by('building')
-    context =  {'all_providers': all_providers,
-                'all_locations': all_locations,}
-    return render(request, 'resource_app/index.html', context)
 
-def provider_detail(request, epic_id):
-    provider = get_object_or_404(Provider, pk=epic_id)
-    return render(request, 'resource_app/provider_detail.html', {'provider':provider})
+class IndexView(generic.ListView):
+    template_name = 'resource_app/index.html'
+    context_object_name = 'latest_provider_list'
 
-def location_detail(request, id):
-    location = get_object_or_404(Location, pk=id)
-    return render(request, 'resource_app/location_detail.html', {'location':location})
+    def get_queryset(self):
+        return Provider.objects.order_by('epic_id')[:10]
+
+
+class DetailView(generic.DetailView):
+    model = Provider
+    template_name = 'resource_app/provider_detail.html'
+
+
+# def location_detail(request, id):
+#     location = get_object_or_404(Location, pk=id)
+#     return render(request, 'resource_app/location_detail.html', {'location':location})
+
 
 def add_provider(request):
     if request.method == 'POST':

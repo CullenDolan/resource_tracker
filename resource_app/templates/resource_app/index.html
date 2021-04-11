@@ -3,22 +3,12 @@
     <li><a href="{% url 'resource_app:add_provider' %}">Click Here to Add a Provider</a></li>
 </ul>
 <h1>View a Provider's Schedule</h1>
-    {% if all_providers %}
+    {% if object_list %}
         <ul>
-            {% for provider in all_providers %}
+            {% for provider in object_list %}
                 <li><a href="{% url 'resource_app:provider_detail' provider.epic_id %}">{{ provider.prov_lname }}</a></li>
             {% endfor %}
         </ul>
     {% else %}
         <p>No providers are available.</p>
-    {% endif %}
-<h1>View the Available Locations</h1>
-    {% if all_locations %}
-        <ul>
-            {% for location in all_locations %}
-                <li><a href="{% url 'resource_app:location_detail' location.id %}">{{ location.building }}</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No locations are available.</p>
     {% endif %}
