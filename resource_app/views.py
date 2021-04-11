@@ -21,9 +21,9 @@ def location_detail(request, id):
 def add_provider(request):
     if request.method == 'POST':
         form = ProviderForm(request.POST)
-        #if form.is_valid():
-        form.save()
-        #return redirect(views.index)
+        if form.is_valid():
+            form.save()
+        return redirect(reverse('resource_app:index'), name='index')
     else:
         form = ProviderForm()
     return render(request, 'resource_app/add_provider.html', {'form':form})
