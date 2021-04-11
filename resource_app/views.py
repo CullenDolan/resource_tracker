@@ -23,7 +23,7 @@ def add_provider(request):
         form = ProviderForm(request.POST)
         #if form.is_valid():
         form.save()
-        return redirect(views.index)
+        #return redirect(views.index)
     else:
         form = ProviderForm()
     return render(request, 'resource_app/add_provider.html', {'form':form})
