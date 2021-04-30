@@ -1,6 +1,6 @@
 # resource_tracker
 
-This is a fully featured Django App for scheduling resources across multiple locations and times (such as healthcare workers).
+This is a Django App for scheduling resources across multiple locations and times (such as healthcare workers). Need to work on the web server deployment process.
 
 ## Technical Requirements
 
